@@ -1,9 +1,21 @@
+module "labels" {
+  source      = "git::git@github.com:opz0/terraform-gcp-labels.git?ref=master"
+  name        = var.name
+  environment = var.environment
+  label_order = var.label_order
+  managedby   = var.managedby
+  repository  = var.repository
+}
+
+data "google_client_config" "current" {
+}
+
 #####==============================================================================
 ##### A Response Policy is a collection of selectors that apply to queries made
 ###### against one or more Virtual Private Cloud networks.
 #####==============================================================================
 resource "google_dns_response_policy" "this" {
-  project              = var.project_id
+  project              = data.google_client_config.current.project
   response_policy_name = var.policy_name
   description          = var.description
   dynamic "networks" {
@@ -20,7 +32,7 @@ resource "google_dns_response_policy" "this" {
 resource "google_dns_response_policy_rule" "this" {
   for_each        = toset(keys(var.rules))
   provider        = google-beta
-  project         = var.project_id
+  project         = data.google_client_config.current.project
   rule_name       = each.key
   dns_name        = lookup(var.rules[each.key], "dns_name")
   response_policy = google_dns_response_policy.this.response_policy_name

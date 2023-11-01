@@ -1,6 +1,31 @@
-variable "project_id" {
+variable "name" {
   type        = string
-  description = "The ID of the project in which the DNS response policy needs to be created."
+  default     = "test"
+  description = "Name of the resource. Provided by the client when the resource is created. "
+}
+
+variable "environment" {
+  type        = string
+  default     = ""
+  description = "Environment (e.g. `prod`, `dev`, `staging`)."
+}
+
+variable "label_order" {
+  type        = list(any)
+  default     = ["name", "environment"]
+  description = "Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] ."
+}
+
+variable "managedby" {
+  type        = string
+  default     = ""
+  description = "ManagedBy, eg 'Opz0'."
+}
+
+variable "repository" {
+  type        = string
+  default     = ""
+  description = "Terraform current module repo"
 }
 
 variable "description" {
@@ -24,7 +49,6 @@ variable "rules" {
     })))
   }))
   description = <<EOF
-
   EOF
 }
 

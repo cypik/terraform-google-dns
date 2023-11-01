@@ -9,9 +9,9 @@ provider "google" {
 #####==============================================================================
 module "dns_public_zone" {
   source                             = "../.."
-  project_id                         = var.project_id
   type                               = "public"
-  name                               = var.name
+  name                               = "test"
+  environment                        = "dns-public-zone"
   domain                             = var.domain
   labels                             = var.labels
   private_visibility_config_networks = [var.network_self_links]

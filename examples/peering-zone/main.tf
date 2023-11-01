@@ -11,8 +11,6 @@ module "vpc" {
   source                                    = "git::git@github.com:opz0/terraform-gcp-vpc.git?ref=master"
   name                                      = "app"
   environment                               = "test"
-  label_order                               = ["name", "environment"]
-  project_id                                = "opz0-397319"
   routing_mode                              = "REGIONAL"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
   auto_create_subnetworks                   = true
@@ -23,9 +21,9 @@ module "vpc" {
 #####==============================================================================
 module "dns_peering_zone" {
   source                             = "../.."
-  project_id                         = "opz0-397319"
   type                               = "peering"
-  name                               = "foo-local"
+  name                               = "test"
+  environment                        = "dns-peering-zone"
   domain                             = "foo.local."
   private_visibility_config_networks = [module.vpc.self_link]
   target_network                     = ""

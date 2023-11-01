@@ -1,12 +1,24 @@
+module "labels" {
+  source      = "git::git@github.com:opz0/terraform-gcp-labels.git?ref=master"
+  name        = var.name
+  environment = var.environment
+  label_order = var.label_order
+  managedby   = var.managedby
+  repository  = var.repository
+}
+
+data "google_client_config" "current" {
+}
+
 #####==============================================================================
 ##### A zone is peering subtree of the DNS namespace under one administrative responsibility.
 #####==============================================================================
 resource "google_dns_managed_zone" "peering" {
-  count    = var.type == "peering" ? 1 : 0
-  provider = google-beta
-  project  = var.project_id
-  name     = var.name
-  dns_name = var.domain
+  count         = var.type == "peering" ? 1 : 0
+  provider      = google-beta
+  project       = data.google_client_config.current.project
+  name          = format("%s", module.labels.id)
+  dns_name      = var.domain
   description   = var.description
   labels        = var.labels
   visibility    = "private"
@@ -37,8 +49,8 @@ resource "google_dns_managed_zone" "peering" {
 resource "google_dns_managed_zone" "forwarding" {
   count         = var.type == "forwarding" ? 1 : 0
   provider      = google-beta
-  project       = var.project_id
-  name          = var.name
+  project       = data.google_client_config.current.project
+  name          = format("%s", module.labels.id)
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
@@ -73,8 +85,8 @@ resource "google_dns_managed_zone" "forwarding" {
 #####==============================================================================
 resource "google_dns_managed_zone" "private" {
   count         = var.type == "private" ? 1 : 0
-  project       = var.project_id
-  name          = var.name
+  project       = data.google_client_config.current.project
+  name          = format("%s", module.labels.id)
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
@@ -99,8 +111,8 @@ resource "google_dns_managed_zone" "private" {
 #####==============================================================================
 resource "google_dns_managed_zone" "public" {
   count         = var.type == "public" ? 1 : 0
-  project       = var.project_id
-  name          = var.name
+  project       = data.google_client_config.current.project
+  name          = format("%s", module.labels.id)
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
@@ -141,8 +153,8 @@ resource "google_dns_managed_zone" "public" {
 resource "google_dns_managed_zone" "reverse_lookup" {
   count          = var.type == "reverse_lookup" ? 1 : 0
   provider       = google-beta
-  project        = var.project_id
-  name           = var.name
+  project        = data.google_client_config.current.project
+  name           = format("%s", module.labels.id)
   dns_name       = var.domain
   description    = var.description
   labels         = var.labels
@@ -169,8 +181,8 @@ resource "google_dns_managed_zone" "reverse_lookup" {
 resource "google_dns_managed_zone" "service_directory" {
   count         = var.type == "service_directory" ? 1 : 0
   provider      = google-beta
-  project       = var.project_id
-  name          = var.name
+  project       = data.google_client_config.current.project
+  name          = format("%s", module.labels.id)
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
@@ -197,8 +209,8 @@ resource "google_dns_managed_zone" "service_directory" {
 ##### Manages a set of DNS records within Google Cloud DNS.
 #####==============================================================================
 resource "google_dns_record_set" "cloud-static-records" {
-  project      = var.project_id
-  managed_zone = var.name
+  project      = data.google_client_config.current.project
+  managed_zone = format("%s", module.labels.id)
 
   for_each = { for record in var.recordsets : join("/", [record.name, record.type]) => record }
   name = (
@@ -206,8 +218,8 @@ resource "google_dns_record_set" "cloud-static-records" {
     "${each.value.name}.${var.domain}" :
     var.domain
   )
-  type = each.value.type
-  ttl  = each.value.ttl
+  type    = each.value.type
+  ttl     = each.value.ttl
   rrdatas = each.value.records
 
   depends_on = [

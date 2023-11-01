@@ -9,10 +9,8 @@ provider "google" {
 #####==============================================================================
 module "vpc" {
   source                                    = "git::git@github.com:opz0/terraform-gcp-vpc.git?ref=master"
-  name                                      = "app1"
+  name                                      = "app"
   environment                               = "test"
-  label_order                               = ["name", "environment"]
-  project_id                                = "opz0-397319"
   routing_mode                              = "REGIONAL"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
   auto_create_subnetworks                   = true
@@ -23,8 +21,9 @@ module "vpc" {
 #####==============================================================================
 module "dns_response_policy" {
   source             = "../../modules/dns_response_policy"
-  project_id         = "opz0-397319"
-  policy_name        = "dns-response-policy-test"
+  policy_name        = "dns-test"
+  name               = "test"
+  environment        = "dns-response-policy"
   network_self_links = [module.vpc.self_link]
   description        = "Example DNS response policy created by terraform module Opz0."
 

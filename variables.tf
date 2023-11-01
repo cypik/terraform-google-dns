@@ -1,11 +1,35 @@
+variable "name" {
+  type        = string
+  default     = "test"
+  description = "Name of the resource. Provided by the client when the resource is created. "
+}
+
+variable "environment" {
+  type        = string
+  default     = ""
+  description = "Environment (e.g. `prod`, `dev`, `staging`)."
+}
+
+variable "label_order" {
+  type        = list(any)
+  default     = ["name", "environment"]
+  description = "Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] ."
+}
+
+variable "managedby" {
+  type        = string
+  default     = ""
+  description = "ManagedBy, eg 'Opz0'."
+}
+
+variable "repository" {
+  type        = string
+  default     = ""
+  description = "Terraform current module repo"
+}
 
 variable "domain" {
   description = "Zone domain, must end with a period."
-  type        = string
-}
-
-variable "name" {
-  description = "Zone name, must be unique within the project."
   type        = string
 }
 
@@ -13,12 +37,6 @@ variable "private_visibility_config_networks" {
   description = "List of VPC self links that can see this zone."
   default     = []
   type        = list(any)
-}
-
-variable "project_id" {
-  description = "Project id for the zone."
-  type        = string
-  default     = ""
 }
 
 variable "target_name_server_addresses" {

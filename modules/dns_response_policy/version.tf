@@ -10,8 +10,4 @@ terraform {
       version = ">= 4.75, < 5.0"
     }
   }
-
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-cloud-dns:dns_response_policy/v5.0.2"
-  }
 }

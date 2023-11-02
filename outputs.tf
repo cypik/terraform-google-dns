@@ -5,7 +5,6 @@ output "type" {
 
 output "name" {
   description = "The DNS zone name."
-
   value = element(
     concat(
       google_dns_managed_zone.peering.*.name,
@@ -21,7 +20,6 @@ output "name" {
 
 output "domain" {
   description = "The DNS zone domain."
-
   value = element(
     concat(
       google_dns_managed_zone.peering.*.dns_name,
@@ -37,7 +35,6 @@ output "domain" {
 
 output "name_servers" {
   description = "The DNS zone name servers."
-
   value = flatten(
     concat(
       google_dns_managed_zone.peering.*.name_servers,
@@ -52,7 +49,6 @@ output "name_servers" {
 
 output "zone_id" {
   description = "An identifier for the resource with format."
-
   value = flatten(
     concat(
       google_dns_managed_zone.peering.*.id,
@@ -67,7 +63,6 @@ output "zone_id" {
 
 output "managed_zone_id" {
   description = "An identifier for the resource with format."
-
   value = flatten(
     concat(
       google_dns_managed_zone.peering.*.managed_zone_id,
@@ -82,7 +77,6 @@ output "managed_zone_id" {
 
 output "creation_time" {
   description = "The time that this resource was created on the server."
-
   value = flatten(
     concat(
       google_dns_managed_zone.peering.*.creation_time,

@@ -11,13 +11,4 @@ terraform {
       version = ">= 4.40, < 5.0"
     }
   }
-
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-cloud-dns/v5.1.0"
-  }
-
-  provider_meta "google-beta" {
-    module_name = "blueprints/terraform/terraform-google-cloud-dns/v5.1.0"
-  }
-
 }

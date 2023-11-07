@@ -3,18 +3,27 @@ provider "google" {
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
-
+#####==============================================================================
+##### vpc module call.
+#####==============================================================================
+module "vpc" {
+  source                                    = "git::https://github.com/opz0/terraform-gcp-vpc.git?ref=v1.0.0"
+  name                                      = "app"
+  environment                               = "test"
+  routing_mode                              = "REGIONAL"
+  network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
+}
 #####==============================================================================
 ##### dns-public-zone module call.
 #####==============================================================================
 module "dns_public_zone" {
   source                             = "../.."
   type                               = "public"
-  name                               = "test"
-  environment                        = "dns-public-zone"
+  name                               = "app-test"
+  environment                        = "public"
   domain                             = var.domain
   labels                             = var.labels
-  private_visibility_config_networks = [var.network_self_links]
+  private_visibility_config_networks = [module.vpc.self_link]
   enable_logging                     = true
 
   recordsets = [

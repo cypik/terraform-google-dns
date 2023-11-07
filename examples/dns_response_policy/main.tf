@@ -13,7 +13,6 @@ module "vpc" {
   environment                               = "test"
   routing_mode                              = "REGIONAL"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
-  auto_create_subnetworks                   = true
 }
 
 #####==============================================================================
@@ -22,8 +21,8 @@ module "vpc" {
 module "dns_response_policy" {
   source             = "../../modules/dns_response_policy"
   policy_name        = "dns-test"
-  name               = "test"
-  environment        = "dns-response-policy"
+  name               = "app-test"
+  environment        = "response-policy"
   network_self_links = [module.vpc.self_link]
   description        = "Example DNS response policy created by terraform module Opz0."
 

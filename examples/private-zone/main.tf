@@ -13,7 +13,6 @@ module "vpc" {
   environment                               = "test"
   routing_mode                              = "REGIONAL"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
-  auto_create_subnetworks                   = true
 }
 
 #####==============================================================================
@@ -22,7 +21,7 @@ module "vpc" {
 module "dns_private_zone" {
   source                             = "../.."
   type                               = "private"
-  name                               = "test"
+  name                               = "app-test"
   environment                        = "dns-private-zone"
   domain                             = var.domain
   labels                             = var.labels

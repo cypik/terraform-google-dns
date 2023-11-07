@@ -13,7 +13,6 @@ module "vpc" {
   environment                               = "test"
   routing_mode                              = "REGIONAL"
   network_firewall_policy_enforcement_order = "AFTER_CLASSIC_FIREWALL"
-  auto_create_subnetworks                   = true
 }
 
 #####==============================================================================
@@ -22,8 +21,8 @@ module "vpc" {
 module "dns_peering_zone" {
   source                             = "../.."
   type                               = "peering"
-  name                               = "test"
-  environment                        = "dns-peering-zone"
+  name                               = "app-test"
+  environment                        = "peering"
   domain                             = "foo.local."
   private_visibility_config_networks = [module.vpc.self_link]
   target_network                     = ""

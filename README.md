@@ -252,7 +252,7 @@ This module provides the following outputs:
 For detailed examples on how to use this module, please refer to the 'examples' directory within this repository.
 
 ## License
-This Terraform module is provided under the '[License Name]' License. Please see the [LICENSE](https://github.com/opz0/terraform-gcp-dns/blob/readme/LICENSE) file for more details.
+This Terraform module is provided under the '[License Name]' License. Please see the [LICENSE](https://github.com/opz0/terraform-gcp-dns/blob/master/LICENSE) file for more details.
 
 ## Author
 Your Name

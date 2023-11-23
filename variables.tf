@@ -19,7 +19,7 @@ variable "label_order" {
 variable "managedby" {
   type        = string
   default     = ""
-  description = "ManagedBy, eg 'Opz0'."
+  description = "ManagedBy, eg 'cypik'."
 }
 
 variable "repository" {
@@ -47,7 +47,7 @@ variable "target_name_server_addresses" {
 
 variable "description" {
   description = "zone description (shown in console)"
-  default     = "Managed by Opz0"
+  default     = "Managed by cypik"
   type        = string
 }
 

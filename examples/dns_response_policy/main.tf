@@ -1,5 +1,5 @@
 provider "google" {
-  project = "opz0-397319"
+  project = "cypik-397319"
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
@@ -8,7 +8,7 @@ provider "google" {
 ##### vpc module call.
 #####==============================================================================
 module "vpc" {
-  source                                    = "git::https://github.com/opz0/terraform-gcp-vpc.git?ref=v1.0.0"
+  source                                    = "git::https://github.com/cypik/terraform-gcp-vpc.git?ref=v1.0.0"
   name                                      = "app"
   environment                               = "test"
   routing_mode                              = "REGIONAL"
@@ -24,7 +24,7 @@ module "dns_response_policy" {
   name               = "app-test"
   environment        = "response-policy"
   network_self_links = [module.vpc.self_link]
-  description        = "Example DNS response policy created by terraform module Opz0."
+  description        = "Example DNS response policy created by terraform module cypik."
 
   rules = {
     "override-google-com" = {

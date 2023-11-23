@@ -29,7 +29,7 @@ module "dns_response_policy" {
   name               = "app-test"
   environment        = "response-policy"
   network_self_links = [module.vpc.self_link]
-  description        = "Example DNS response policy created by terraform module Opz0."
+  description        = "Example DNS response policy created by terraform module cypik."
 
   rules = {
     "override-google-com" = {
@@ -65,7 +65,7 @@ module "dns_response_policy" {
 ## Example: forwarding-zone
 ```hcl
 module "dns_forwarding_zone" {
-  source                             = "git::https://github.com/opz0/terraform-gcp-dns.git?ref=v1.0.0"
+  source                             = "git::https://github.com/cypik/terraform-gcp-dns.git?ref=v1.0.0"
   type                               = "forwarding"
   name                               = "app-test"
   environment                        = "forwarding-zone"
@@ -88,7 +88,7 @@ module "dns_forwarding_zone" {
 
 ```hcl
 module "dns_peering_zone" {
-  source                             = "git::https://github.com/opz0/terraform-gcp-dns.git?ref=v1.0.0"
+  source                             = "git::https://github.com/cypik/terraform-gcp-dns.git?ref=v1.0.0"
   type                               = "peering"
   name                               = "app-test"
   environment                        = "peering-zone"
@@ -106,7 +106,7 @@ module "dns_peering_zone" {
 
 ```hcl
 module "dns_private_zone" {
-  source                             = "git::https://github.com/opz0/terraform-gcp-dns.git?ref=v1.0.0"
+  source                             = "git::https://github.com/cypik/terraform-gcp-dns.git?ref=v1.0.0"
   type                               = "private"
   name                               = "app-test"
   environment                        = "private-zone"
@@ -162,7 +162,7 @@ module "dns_private_zone" {
 
 ```hcl
 module "dns_public_zone" {
-  source                             = "git::https://github.com/opz0/terraform-gcp-dns.git?ref=v1.0.0"
+  source                             = "git::https://github.com/cypik/terraform-gcp-dns.git?ref=v1.0.0"
   type                               = "public"
   name                               = "app-test"
   environment                        = "public-zone"
@@ -249,10 +249,10 @@ This module provides the following outputs:
 - `managed_zone_id` : An identifier for the resource with format.
 
 ## Examples
-For detailed examples on how to use this module, please refer to the 'examples' directory within this repository.
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/cypik/terraform-gcp-dns/tree/master/examples) directory within this repository.
 
 ## License
-This Terraform module is provided under the '[License Name]' License. Please see the [LICENSE](https://github.com/opz0/terraform-gcp-dns/blob/master/LICENSE) file for more details.
+This Terraform module is provided under the '[License Name]' License. Please see the [LICENSE](https://github.com/cypik/terraform-gcp-dns/blob/master/LICENSE) file for more details.
 
 ## Author
 Your Name

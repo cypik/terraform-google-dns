@@ -1,5 +1,5 @@
 provider "google" {
-  project = "cypik-397319"
+  project = "opz0-397319"
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }

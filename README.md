@@ -21,47 +21,6 @@ This project deploys a Google Cloud infrastructure using Terraform to create DNS
 To use this module, include it in your Terraform configuration. Below is an example of how to call the DNS module and its dependencies.
 ### Examples
 
-## Example: dns-reponse-policy
-```hcl
-module "dns_response_policy" {
-  source             = "../../modules/dns_response_policy"
-  policy_name        = "dns-test"
-  name               = "app-test"
-  environment        = "response-policy"
-  network_self_links = [module.vpc.self_link]
-  description        = "Example DNS response policy created by terraform module cypik."
-
-  rules = {
-    "override-google-com" = {
-      dns_name = "*.google.com."
-      rule_local_datas = {
-        "A" = { # Record type.
-          rrdatas = ["192.0.2.91"]
-          ttl     = 300
-        },
-        "AAAA" = {
-          rrdatas = ["2001:db8::8bd:1002"]
-          ttl     = 300
-        }
-      }
-    },
-    "override-withgoogle-com" = {
-      dns_name = "withgoogle.com."
-      rule_local_datas = {
-        "A" = {
-          rrdatas = ["193.0.2.93"]
-          ttl     = 300
-        }
-      }
-    },
-    "bypass-google-account-domain" = {
-      dns_name      = "account.google.com."
-      rule_behavior = "bypassResponsePolicy"
-    }
-  }
-}
-```
-
 ## Example: forwarding-zone
 ```hcl
 module "dns_forwarding_zone" {
@@ -216,6 +175,47 @@ module "dns_public_zone" {
 }
 
 ```
+## Example: dns-reponse-policy
+```hcl
+module "dns_response_policy" {
+  source             = "../../modules/dns_response_policy"
+  policy_name        = "dns-test"
+  name               = "app-test"
+  environment        = "response-policy"
+  network_self_links = [module.vpc.self_link]
+  description        = "Example DNS response policy created by terraform module cypik."
+
+  rules = {
+    "override-google-com" = {
+      dns_name = "*.google.com."
+      rule_local_datas = {
+        "A" = { # Record type.
+          rrdatas = ["192.0.2.91"]
+          ttl     = 300
+        },
+        "AAAA" = {
+          rrdatas = ["2001:db8::8bd:1002"]
+          ttl     = 300
+        }
+      }
+    },
+    "override-withgoogle-com" = {
+      dns_name = "withgoogle.com."
+      rule_local_datas = {
+        "A" = {
+          rrdatas = ["193.0.2.93"]
+          ttl     = 300
+        }
+      }
+    },
+    "bypass-google-account-domain" = {
+      dns_name      = "account.google.com."
+      rule_behavior = "bypassResponsePolicy"
+    }
+  }
+}
+```
+
 This example demonstrates how to create various GCP resources using the provided modules. Adjust the input values to suit your specific requirements.
 
 ## Module Inputs

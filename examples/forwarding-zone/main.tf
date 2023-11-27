@@ -1,5 +1,5 @@
 provider "google" {
-  project = "cypik-397319"
+  project = "opz0-397319"
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
@@ -19,7 +19,7 @@ module "vpc" {
 ##### dns-forwarding-zone module call.
 #####==============================================================================
 module "dns_forwarding_zone" {
-  source                             = "../.."
+  source                             = "../../"
   type                               = "forwarding"
   name                               = "app-test"
   environment                        = "forwarding"

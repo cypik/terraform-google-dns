@@ -56,6 +56,7 @@ variable "target_network" {
   default     = ""
   type        = string
 }
+
 variable "type" {
   description = "Type of zone to create, valid values are 'public', 'private', 'forwarding', 'peering', 'reverse_lookup' and 'service_directory'."
   default     = "private"
@@ -91,13 +92,12 @@ variable "force_destroy" {
   default     = false
   type        = bool
 }
+
 variable "service_namespace_url" {
   type        = string
   default     = ""
   description = "The fully qualified or partial URL of the service directory namespace that should be associated with the zone. This should be formatted like https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace_id} or simply projects/{project}/locations/{location}/namespaces/{namespace_id}."
 }
-
-
 
 variable "recordsets" {
   type = list(object({
@@ -114,4 +114,10 @@ variable "enable_logging" {
   description = "Enable query logging for this ManagedZone"
   default     = false
   type        = bool
+}
+
+variable "visibility" {
+  type        = string
+  default     = ""
+  description = "visibility in public and private"
 }

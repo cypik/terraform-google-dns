@@ -1,5 +1,5 @@
 provider "google" {
-  project = "opz0-397319"
+  project = "local-concord-408802"
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
@@ -23,6 +23,7 @@ module "dns_private_zone" {
   type                               = "private"
   name                               = "app-test"
   environment                        = "dns-private-zone"
+  visibility                         = "private"
   domain                             = var.domain
   labels                             = var.labels
   private_visibility_config_networks = [module.vpc.self_link]

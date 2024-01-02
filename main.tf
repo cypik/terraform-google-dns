@@ -21,7 +21,7 @@ resource "google_dns_managed_zone" "peering" {
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
-  visibility    = "private"
+  visibility    = var.visibility
   force_destroy = var.force_destroy
 
   dynamic "private_visibility_config" {
@@ -54,7 +54,7 @@ resource "google_dns_managed_zone" "forwarding" {
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
-  visibility    = "private"
+  visibility    = var.visibility
   force_destroy = var.force_destroy
 
   dynamic "private_visibility_config" {
@@ -83,6 +83,7 @@ resource "google_dns_managed_zone" "forwarding" {
 #####==============================================================================
 ##### A zone is private subtree of the DNS namespace under one administrative responsibility.
 #####==============================================================================
+#tfsec:ignore:google-dns-enable-dnssec
 resource "google_dns_managed_zone" "private" {
   count         = var.type == "private" ? 1 : 0
   project       = data.google_client_config.current.project
@@ -90,7 +91,7 @@ resource "google_dns_managed_zone" "private" {
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
-  visibility    = "private"
+  visibility    = var.visibility
   force_destroy = var.force_destroy
 
   dynamic "private_visibility_config" {
@@ -116,7 +117,7 @@ resource "google_dns_managed_zone" "public" {
   dns_name      = var.domain
   description   = var.description
   labels        = var.labels
-  visibility    = "public"
+  visibility    = var.visibility
   force_destroy = var.force_destroy
 
   dynamic "dnssec_config" {

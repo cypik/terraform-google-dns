@@ -13,7 +13,7 @@
 
 ## Introduction
 
-This project deploys a Google Cloud infrastructure using Terraform to create **DNS** .
+This project deploys a Google Cloud infrastructure using Terraform to create Dns .
 
 
 ## Usage
@@ -21,7 +21,7 @@ This project deploys a Google Cloud infrastructure using Terraform to create **D
 To use this module, include it in your Terraform configuration. Below is an example of how to call the DNS module and its dependencies.
 ### Examples
 
-## Example: _forwarding-zone_
+## Example: _Forwarding_
 ```hcl
 module "dns_forwarding_zone" {
   source                             = "git::https://github.com/cypik/terraform-gcp-dns.git?ref=v1.0.0"
@@ -44,7 +44,7 @@ module "dns_forwarding_zone" {
   ]
 }
 ```
-## Example: _peering-zone_
+## Example: _Peering_
 
 ```hcl
 module "dns_peering_zone" {
@@ -63,7 +63,7 @@ module "dns_peering_zone" {
 }
 ```
 
-## Example: _private-zone_
+## Example: _Private_
 
 ```hcl
 module "dns_private_zone" {
@@ -120,7 +120,7 @@ module "dns_private_zone" {
   ]
 }
 ```
-## Example: _public-zone_
+## Example: _Public_
 
 ```hcl
 module "dns_public_zone" {
@@ -179,7 +179,7 @@ module "dns_public_zone" {
 }
 
 ```
-## Example: _dns-reponse-policy_
+## Example: _Dns-Response-Policy_
 ```hcl
 module "dns_response_policy" {
   source             = "../../modules/dns_response_policy"
@@ -253,7 +253,7 @@ This module provides the following outputs:
 - `managed_zone_id` : An identifier for the resource with format.
 
 ## Examples
-For detailed examples on how to use this module, please refer to the [EXAMPLES](https://github.com/cypik/terraform-gcp-dns/tree/master/examples) directory within this repository.
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/cypik/terraform-gcp-dns/tree/master/examples) directory within this repository.
 
 ## License
 This Terraform module is provided under the **'[License Name]'** License. Please see the [LICENSE](https://github.com/cypik/terraform-gcp-dns/blob/master/LICENSE) file for more details.

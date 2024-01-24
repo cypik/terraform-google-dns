@@ -8,7 +8,8 @@ provider "google" {
 ##### vpc module call.
 #####==============================================================================
 module "vpc" {
-  source                                    = "git::https://github.com/cypik/terraform-gcp-vpc.git?ref=v1.0.0"
+  source                                    = "cypik/vpc/google"
+  version                                   = "1.0.1"
   name                                      = "app"
   environment                               = "test"
   routing_mode                              = "REGIONAL"

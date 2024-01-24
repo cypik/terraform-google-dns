@@ -11,3 +11,4 @@ credentials.json
 /.idea/misc.xml
 # tf lock file
 .terraform.lock.hcl
+/examples/public-zone/.terraform.tfstate.lock.info
